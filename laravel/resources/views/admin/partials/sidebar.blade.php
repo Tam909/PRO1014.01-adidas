@@ -6,3 +6,4 @@
     <a href="{{ route('users.index') }}">👤 Người dùng</a>
     <a href="{{ route('categories.index') }}">📂 Danh mục</a>
 </div>
+S
