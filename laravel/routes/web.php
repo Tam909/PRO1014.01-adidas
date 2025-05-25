@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('admin.dashboard');
-});
+    return view('welcome');
+})->name('welcome');
+
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
@@ -27,3 +28,21 @@ Route::get('/admin/users', [UserController::class, 'index'])->name('users.index'
 
 // Quản lý danh mục
 Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+
+// Đăng ký và đăng nhập
+
+use App\Http\Controllers\Admin\Auth\AuthController;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
+// Đăng xuất
+Route::post ('/logout', function () {
+    Auth::logout();
+    return redirect()->route('welcome')->with('success', 'Đăng xuất thành công!');
+})->name('logout');
