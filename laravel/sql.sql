@@ -190,10 +190,10 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
--- INSERT INTO `orders` (`id_order`, `user_id`, `id_promotion`, `name`, `tel`, `shipping_address`, `status_order`, `payment`, `total_amount`, `total_money`, `create_at`, `update_at`) VALUES
--- (1, 1, 1, 'Nguyễn Văn A', '0123456789', 'Hà Nội', 0, 0, 2, '100000.00', '2024-11-18 14:25:16', '2024-11-18 14:25:16'),
--- (2, 2, 2, 'Trần Thị B', '0987654321', 'Hồ Chí Minh', 1, 1, 1, '75000.00', '2024-11-18 14:25:16', '2024-11-18 14:25:16'),
--- (3, 3, 3, 'Lê Văn C', '0112233445', 'Đà Nẵng', 2, 0, 1, '100000.00', '2024-11-18 14:25:16', '2024-11-18 14:25:16');
+INSERT INTO `orders` (`id_order`, `user_id`, `id_promotion`, `name`, `tel`, `shipping_address`, `status_order`, `payment`, `total_amount`, `total_money`, `create_at`, `update_at`) VALUES
+(1, 1, 1, 'Nguyễn Văn A', '0123456789', 'Hà Nội', 0, 0, 2, '100000.00', '2024-11-18 14:25:16', '2024-11-18 14:25:16'),
+(2, 2, 2, 'Trần Thị B', '0987654321', 'Hồ Chí Minh', 1, 1, 1, '75000.00', '2024-11-18 14:25:16', '2024-11-18 14:25:16'),
+(3, 3, 3, 'Lê Văn C', '0112233445', 'Đà Nẵng', 2, 0, 1, '100000.00', '2024-11-18 14:25:16', '2024-11-18 14:25:16');
 
 -- --------------------------------------------------------
 
@@ -214,10 +214,10 @@ CREATE TABLE `order_items` (
 -- Dumping data for table `order_items`
 --
 
--- INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total_money`) VALUES
--- (1, 1, 1, 2, '50000.00', '100000.00'),
--- (2, 2, 2, 1, '75000.00', '75000.00'),
--- (3, 3, 3, 1, '100000.00', '100000.00');
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total_money`) VALUES
+(1, 1, 1, 2, '50000.00', '100000.00'),
+(2, 2, 2, 1, '75000.00', '75000.00'),
+(3, 3, 3, 1, '100000.00', '100000.00');
 
 -- --------------------------------------------------------
 
@@ -241,10 +241,10 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
--- INSERT INTO `product` (`id`, `id_categories`, `name`, `price`, `img`, `description`, `status`, `created_at`, `updated_at`) VALUES
--- (1, 1, 'Sản phẩm 1', '25000.00', 'image1.jpg', 'Mô tả sản phẩm 1', 1, '2024-11-18 14:20:51', '2024-11-18 14:20:51'),
--- (2, 1, 'Sản phẩm 2', '75000.00', 'image2.jpg', 'Mô tả sản phẩm 2', 1, '2024-11-18 14:20:51', '2024-11-18 14:20:51'),
--- (3, 1, 'Sản phẩm 3', '100000.00', 'image3.jpg', 'Mô tả sản phẩm 3', 1, '2024-11-18 14:20:51', '2024-11-18 14:20:51');
+INSERT INTO `product` (`id`, `id_categories`, `name`, `price`, `img`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Sản phẩm 1', '25000.00', 'image1.jpg', 'Mô tả sản phẩm 1', 1, '2024-11-18 14:20:51', '2024-11-18 14:20:51'),
+(2, 1, 'Sản phẩm 2', '75000.00', 'image2.jpg', 'Mô tả sản phẩm 2', 1, '2024-11-18 14:20:51', '2024-11-18 14:20:51'),
+(3, 1, 'Sản phẩm 3', '100000.00', 'image3.jpg', 'Mô tả sản phẩm 3', 1, '2024-11-18 14:20:51', '2024-11-18 14:20:51');
 
 -- --------------------------------------------------------
 
@@ -267,10 +267,10 @@ CREATE TABLE `promotion` (
 -- Dumping data for table `promotion`
 --
 
--- INSERT INTO `promotion` (`id`, `code`, `start_date`, `end_date`, `quantity`, `min_money`, `discount_value`, `status`) VALUES
--- (1, 'PROMO1', '2024-11-01 00:00:00', '2024-11-30 23:59:59', 10, 50000, '10.00', 0),
--- (2, 'PROMO2', '2024-11-05 00:00:00', '2024-12-05 23:59:59', 5, 75000, '15.00', 0),
--- (3, 'PROMO3', '2024-10-01 00:00:00', '2024-10-31 23:59:59', 3, 100000, '20.00', 1);
+INSERT INTO `promotion` (`id`, `code`, `start_date`, `end_date`, `quantity`, `min_money`, `discount_value`, `status`) VALUES
+(1, 'PROMO1', '2024-11-01 00:00:00', '2024-11-30 23:59:59', 10, 50000, '10.00', 0),
+(2, 'PROMO2', '2024-11-05 00:00:00', '2024-12-05 23:59:59', 5, 75000, '15.00', 0),
+(3, 'PROMO3', '2024-10-01 00:00:00', '2024-10-31 23:59:59', 3, 100000, '20.00', 1);
 
 -- --------------------------------------------------------
 
@@ -288,10 +288,10 @@ CREATE TABLE `size` (
 -- Dumping data for table `size`
 --
 
--- INSERT INTO `size` (`id`, `name`, `status`) VALUES
--- (1, 'M', 0),
--- (2, 'L', 0),
--- (3, 'XL', 1);
+INSERT INTO `size` (`id`, `name`, `status`) VALUES
+(1, 'M', 0),
+(2, 'L', 0),
+(3, 'XL', 1);
 
 -- --------------------------------------------------------
 
@@ -313,10 +313,10 @@ CREATE TABLE `varianti` (
 -- Dumping data for table `varianti`
 --
 
--- INSERT INTO `varianti` (`id_var`, `id_pro`, `id_color`, `id_size`, `price`, `quantity`, `img`) VALUES
--- (1, 1, 1, 1, 50000, 10, 'giay1_var.jpg'),
--- (2, 2, 2, 2, 75000, 5, 'giay2_var.jpg'),
--- (3, 3, 3, 3, 100000, 3, 'giay3_var.jpg');
+INSERT INTO `varianti` (`id_var`, `id_pro`, `id_color`, `id_size`, `price`, `quantity`, `img`) VALUES
+(1, 1, 1, 1, 50000, 10, 'giay1_var.jpg'),
+(2, 2, 2, 2, 75000, 5, 'giay2_var.jpg'),
+(3, 3, 3, 3, 100000, 3, 'giay3_var.jpg');
 
 --
 -- Indexes for dumped tables

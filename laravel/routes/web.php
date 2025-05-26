@@ -17,8 +17,9 @@ Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboa
 Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
 
 // Quản lý sản phẩm
-Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
-
+// Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
+// Route::resource('products', ProductController::class);
+  
 // Quản lý đơn hàng
 Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
 
