@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 class Product extends Model
 {
-    use HasFactory;
-
-    // Cho phép fill các trường sau
     protected $fillable = [
+        'id_categories',
         'name',
-        'description',
         'price',
-        'image',
+        'img',
+        'description',
+        'status'
     ];
+    public function category() {
+        return $this->belongsTo(Category::class, 'id_categories');
+        
+    }
+   
 }
