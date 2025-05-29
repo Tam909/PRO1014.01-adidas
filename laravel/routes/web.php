@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 // Đăng ký và đăng nhập
 
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\User\Product\ProductController as ProductProductController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\Admin;
 
@@ -90,3 +91,11 @@ Route::get('/admin/categories', [CategoryController::class, 'index'])->name('cat
 Route::prefix('admin')->group(function(){
     Route::resource('products', ProductController::class)->except(['show']);
 } );
+
+
+//Người dùng 
+//Trang chủ
+Route::get('/', [ProductProductController::class, 'index'])->name('home');
+
+// Trang chi tiết sản phẩm
+Route::get('/products/{id}', [ProductProductController::class, 'show'])->name('products.show');
