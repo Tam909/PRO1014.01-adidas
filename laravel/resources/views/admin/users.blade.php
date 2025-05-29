@@ -40,11 +40,7 @@
                     <td>
                         <a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-warning">Sửa</a>
 
-                        <form action="{{ route('admin.users.destroy', ['id' => $user->id]) }}" method="POST" class="d-inline" onsubmit="return confirm('Bạn có chắc muốn xóa người dùng này?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
-                        </form>
+                        
                     </td>
                 </tr>
             @endforeach
