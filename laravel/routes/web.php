@@ -52,6 +52,8 @@ Route::get('/admin/users', [UserController::class, 'index'])->name('users.index'
 
 // Quản lý danh mục
 Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::resource('categories', CategoryController::class)->names('admin.category');
+
     Route::get('/users',  [UserController::class, 'index'])->name('admin.users');
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
