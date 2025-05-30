@@ -14,7 +14,7 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return redirect()-> route('welcome')->with('success','Đăng nhập thành công.');
+        return redirect()-> route('home')->with('success','Đăng nhập thành công.');
             
     }
 }

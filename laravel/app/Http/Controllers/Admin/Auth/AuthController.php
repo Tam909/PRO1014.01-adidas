@@ -56,7 +56,7 @@ class AuthController extends Controller
 
   public function logout(){
     Auth::logout();
-    return redirect()->route('welcome')->with('success', 'Đăng xuất thành công!');
+    return redirect()->route('home')->with('success', 'Đăng xuất thành công!');
   }
 
 }

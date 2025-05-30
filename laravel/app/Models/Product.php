@@ -7,6 +7,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 class Product extends Model
 {
+    protected $table = 'products';
+
     protected $fillable = [
         'id_categories',
         'name',

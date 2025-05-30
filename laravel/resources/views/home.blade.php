@@ -17,12 +17,40 @@
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Trang Chủ</a></li>
-        <a class="nav-link" href="{{ route('products.index') }}">Sản Phẩm</a>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="{{route('home')}}">Trang Chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Sản Phẩm</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Giới Thiệu</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Liên Hệ</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{route('carts.index')}}">Giỏ Hàng</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav ms-auto align-items-center">
+        @auth
+          <li class="nav-item me-2">
+            <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
+          </li>
+          <li class="nav-item me-2">
+            @if(Auth::user()->role === 'admin')
+              <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm">🔧 Quản trị</a>
+            @endif
+          </li>
+          <li class="nav-item">
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button class="btn btn-outline-light btn-sm" type="submit">Đăng xuất</button>
+            </form>
+          </li>
+        @else
+          <li class="nav-item me-2">
+            <a class="btn btn-outline-light btn-sm" href="{{ route('login') }}">Đăng nhập</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-light btn-sm" href="{{ route('register') }}">Đăng ký</a>
+          </li>
+        @endauth
       </ul>
     </div>
   </div>
@@ -36,6 +64,7 @@
     <a href="#" class="btn btn-primary btn-lg">Khám phá ngay</a>
   </div>
 </section>
+
 
 <!-- Features Section -->
 <section class="py-5">
