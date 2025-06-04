@@ -9,6 +9,6 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        return view('user.Thanhtoan.checkout');
+        return view('user.Oder.checkout');
     }
 }
