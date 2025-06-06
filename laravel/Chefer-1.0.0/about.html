@@ -10,25 +10,26 @@
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
+
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="{{ asset('https://fonts.googleapis.com')  }}">
-    <link rel="preconnect" href="{{ asset('https://fonts.gstatic.com') }}" crossorigin>
-    <link href="{{ asset('https://fonts.googleapis.com/css2?family=Emblema+One&family=Poppins:wght@400;600&display=swap') }}"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Poppins:wght@400;600&display=swap"
         rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet') }}">
-    <link href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -45,11 +46,24 @@
             <div class="col-lg-3 bg-primary d-none d-lg-block">
                 <a href="index.html"
                     class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                    <h1 class="m-0 display-4 text-white text-uppercase">Adidas</h1>
+                    <h1 class="m-0 display-4 text-white text-uppercase">Chefer</h1>
                 </a>
             </div>
             <div class="col-lg-9">
-              
+                <div class="row gx-0 d-none d-lg-flex bg-dark">
+                    <div class="col-6 px-5 text-start">
+                        <div class="h-100 d-inline-flex align-items-center py-2 me-4">
+                            <i class="fa fa-envelope text-primary me-2"></i>
+                            <p class="mb-0">info@example.com</p>
+                        </div>
+                    </div>
+                    <div class="col-6 px-5 text-end">    
+                        <div class="h-100 d-inline-flex align-items-center py-2">
+                            <i class="fa fa-phone-alt text-primary me-2"></i>
+                            <p class="mb-0">+012 345 6789</p>
+                        </div>
+                    </div>
+                </div>
                 <nav class="navbar navbar-expand-lg navbar-dark p-3 p-lg-0 px-lg-5" style="background: #111111;">
                     <a href="index.html" class="navbar-brand d-block d-lg-none">
                         <h1 class="m-0 display-4 text-primary text-uppercase">Chefer</h1>
@@ -60,43 +74,31 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Trang Chủ</a>
+                            <a href="index.html" class="nav-item nav-link">Home</a>
+                            <a href="about.html" class="nav-item nav-link active">About</a>
                             <a href="menu.html" class="nav-item nav-link">Menu</a>
-                            <a href="team.html" class="nav-item nav-link">Thể Thao</a>
+                            <a href="team.html" class="nav-item nav-link">Chefs</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sản Phẩm</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="feature.html" class="dropdown-item">Bóng đá</a>
-                                    <a href="blog.html" class="dropdown-item">Chạy</a>
-                                    <a href="testimonial.html" class="dropdown-item">Bóng rổ</a>
+                                    <a href="feature.html" class="dropdown-item">Features</a>
+                                    <a href="blog.html" class="dropdown-item">Blog Post</a>
+                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                    <a href="404.html" class="dropdown-item">404 Error</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Các Nhãn Hiệu</a>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-none d-lg-flex align-items-center py-2">
-                            @auth
-                            <li class="nav-item me-2">
-                              <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
-                            </li>
-                            <li class="nav-item me-2">
-                              @if(Auth::user()->role === 'admin')
-                                <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm">🔧 Quản trị</a>
-                              @endif
-                            </li>
-                            <li class="nav-item">
-                              <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button class="btn btn-outline-light btn-sm" type="submit">Đăng xuất</button>
-                              </form>
-                            </li>
-                          @else
-                            <li class="nav-item me-2">
-                              <a class="btn btn-outline-light btn-sm" href="{{ route('login') }}">Đăng nhập</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="btn btn-light btn-sm" href="{{ route('register') }}">Đăng ký</a>
-                            </li>
-                          @endauth
+                            <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
                         </div>
                     </div>
                 </nav>
@@ -108,32 +110,8 @@
 
     <!-- Hero Start -->
     <div class="container-fluid p-5 mb-5 bg-dark text-secondary">
-        <div class="row g-5 py-5">
-            <div class="mb-4 wow fadeIn text-center" data-wow-delay="0.2s" >
-                <h5 class="section-title ">FIND YOUR TEAM</h5>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/2.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/3.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/4.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/5.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/6.png">
-                </a>
-            </div>
-           
-            <div class=" wow fadeIn" data-wow-delay="0.1s">
-                <img class="img-fluid rounded mb-3 " src="img/slide.gif" alt="">
-                <h3 class="text-center"  style="background-color: aliceblue"   >ADICOLOR</h3>
-                <p class="mb-0" >Biểu tượng không thể phủ nhận. Và chính bạn làm nên điều đó.</p>
-            </div>
-        
+        <div class="container wow fadeIn" data-wow-delay="0.1s">
+            <h1 class="display-1 text-secondary text-center mb-0">About</h1>
         </div>
     </div>
     <!-- Hero End -->
@@ -144,34 +122,39 @@
         <div class="row gx-5">
             <div class="col-lg-5 mb-5 mb-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 500px;">
                 <div class="position-relative h-100">
+                    <div class="position-absolute top-0 start-0 animate-rotate"
+                        style="width: 160px; height: 160px;">
+                        <img class="img-fluid" src="img/about-round.jpg" alt="">
+                    </div>
                     <img class="position-absolute w-100 h-100 rounded-circle rounded-bottom rounded-end"
-                        src="img/abc.jpg" style="object-fit: cover;">
+                        src="img/about.jpg" style="object-fit: cover;">
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="mb-4 wow fadeIn" data-wow-delay="0.2s">
-                    <h5 class="section-title">Adidas</h5>
-                    <h1 class="display-3 mb-0">Adidas mang đến trải nghiệm và trách nhiệm</h1>
+                    <h5 class="section-title">About Us</h5>
+                    <h1 class="display-3 mb-0">Cooking Together With The Expert</h1>
                 </div>
-                <p class="mb-4 wow fadeIn" data-wow-delay="0.3s">Thể thao nâng cao sức khoẻ. Giúp bạn luôn tĩnh tâm. 
-                    Kết nối chúng ta. Thông qua thể thao, chúng ta có sức mạnh để thay đổi cuộc sống—bằng những câu chuyện 
-                    về các vận động viên truyền cảm hứng, công nghệ đột phá và bằng cách giúp bạn đứng lên và vận động.
-                </p>
+                <p class="mb-4 wow fadeIn" data-wow-delay="0.3s">Nonumy erat diam duo labore clita. Sit magna ipsum dolor sed ea duo at ut. Tempor sit
+                    lorem sit magna ipsum duo. Sit eos dolor ut sea rebum, diam sea rebum lorem kasd ut ipsum dolor est
+                    ipsum. Et stet amet justo amet clita erat, ipsum sed at ipsum eirmod labore lorem.</p>
                 <div class="row">
                     <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
                         <div class="bg-light rounded p-4">
-                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/a.avif" style="width: 80px; height: 80px;">
-                            <h4>Sale 70 %</h4>
-                            <p class="mb-0">
-                                Tri ân khách hàng với chương trình giảm giá lên đến 70% cho các sản phẩm thể thao.
-                            </p>
+                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/feature-1.png" style="width: 80px; height: 80px;">
+                            <h4>Master Chefs</h4>
+                            <p class="mb-0">Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam
+                                ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing
+                                labore.</p>
                         </div>
                     </div>
                     <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
                         <div class="bg-light rounded p-4">
-                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/7.jpg" style="width: 80px; height: 80px;">
-                            <h4>Adidas QA68</h4>
-                            <p class="mb-0">Sản phẩm mới mang lại cảm giác chân thân và mềm mại hơn từ nhà chúng tôi</p>
+                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/feature-3.png" style="width: 80px; height: 80px;">
+                            <h4>Quality Food</h4>
+                            <p class="mb-0">Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam
+                                ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing
+                                labore.</p>
                         </div>
                     </div>
                 </div>
@@ -182,37 +165,53 @@
 
 
     <!-- Facts Start -->
-    <div class="container-fluid bg-dark facts p-5 my-5 ">
-        <div class="row gx-5 gy-4 py-5 ">
-            <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container-fluid bg-dark facts p-5 my-5">
+        <div class="row gx-5 gy-4 py-5">
+            <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.1s">
                 <div class="d-flex">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-3"
+                        style="width: 80px; height: 80px; background: #111111;">
+                        <i class="fa fa-star fs-4 text-primary"></i>
+                    </div>
                     <div class="ps-4">
-                        <h5 class="text-white">340Tr+</h5>
-                        <h1 class=" text-secondary mb-0" data-toggle="counter-up">Sản Phẩm</h1>
+                        <h5 class="text-white">Years</h5>
+                        <h1 class="display-5 text-secondary mb-0" data-toggle="counter-up">1234</h1>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.2s">
                 <div class="d-flex">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-3"
+                        style="width: 80px; height: 80px; background: #111111;">
+                        <i class="fa fa-users fs-4 text-primary"></i>
+                    </div>
                     <div class="ps-4">
-                        <h5 class="text-white">500Tr+</h5>
-                        <h1 class=" text-secondary mb-0" data-toggle="counter-up">Khách Hàng</h1>
+                        <h5 class="text-white">Clients</h5>
+                        <h1 class="display-5 text-secondary mb-0" data-toggle="counter-up">1234</h1>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.3s">
                 <div class="d-flex">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-3"
+                        style="width: 80px; height: 80px; background: #111111;">
+                        <i class="fa fa-check fs-4 text-primary"></i>
+                    </div>
                     <div class="ps-4">
-                        <h5 class="text-white">62.035</h5>
-                        <h1 class="display-5 text-secondary mb-0" data-toggle="counter-up">Nhân Viên</h1>
+                        <h5 class="text-white">Awards</h5>
+                        <h1 class="display-5 text-secondary mb-0" data-toggle="counter-up">1234</h1>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.4s">
                 <div class="d-flex">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-3"
+                        style="width: 80px; height: 80px; background: #111111;">
+                        <i class="fa fa-mug-hot fs-4 text-primary"></i>
+                    </div>
                     <div class="ps-4">
-                        <h5 class="text-white">23,7 tỷ euro</h5>
-                        <h1 class="display-5 text-secondary mb-0" data-toggle="counter-up">Doanh Thu</h1>
+                        <h5 class="text-white">Events</h5>
+                        <h1 class="display-5 text-secondary mb-0" data-toggle="counter-up">1234</h1>
                     </div>
                 </div>
             </div>
@@ -221,104 +220,82 @@
     <!-- Facts End -->
 
 
-    <!-- Feature Start -->
-    <div class="container-fluid feature position-relative p-5 pb-0 mt-5">
-        <div class="row g-3 gb-3">
-            @foreach ($products->take(3) as $product)
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                  <img src="{{ asset('storage/' . $product->img) }}" class="card-img-top" alt="{{ $product->name }}">
-                  <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p class="card-text text-danger fw-bold">{{ number_format($product->price, 0, ',', '.') }}₫</p>
-                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary mt-auto">Xem chi tiết</a>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        </div>
-    </div>
-    <!-- Feature End -->
-
-
     <!-- Team Start -->
     <div class="container-fluid p-5">
         <div class="mb-5 text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px; margin: auto;">
-            <h5 class="section-title">professional leadership</h5>
-            <h1 class="display-3 mb-0">Đội Ngũ Điều Hành</h1>
+            <h5 class="section-title">Expert Chefs</h5>
+            <h1 class="display-3 mb-0">Let's Meet The Expert</h1>
         </div>
         <div class="row g-5">
             <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
                 <div class="team-item position-relative">
                     <div class="position-relative overflow-hidden rounded-circle rounded-bottom rounded-end">
-                        <img class="img-fluid w-100" src="img/anh1.avif" alt="">
+                        <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
+                        <div class="team-overlay">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="position-absolute start-0 bottom-0 d-flex flex-column justify-content-center w-100  rounded-bottom text-center"
-                        style="height: 100px;  background: rgba(34, 36, 41, .9);">
-                        <h5 class="text-light">Bjørn Gulden</h5>
-                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Tổng Giám đốc Điều hành</p>
+                    <div class="position-absolute start-0 bottom-0 d-flex flex-column justify-content-center w-100 rounded-bottom text-center"
+                        style="height: 100px; background: rgba(34, 36, 41, .9);">
+                        <h5 class="text-light">John Deo</h5>
+                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Master Chef</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.3s">
                 <div class="team-item position-relative">
                     <div class="position-relative overflow-hidden rounded-circle rounded-bottom rounded-end">
-                        <img class="img-fluid w-100" src="img/anh2.jpg" alt="">
-                      
+                        <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
+                        <div class="team-overlay">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="position-absolute start-0 bottom-0 d-flex flex-column justify-content-center w-100 rounded-bottom text-center"
                         style="height: 100px; background: rgba(34, 36, 41, .9);">
-                        <h5 class="text-light">Harm Ohlmeyer </h5>
-                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Giám đốc Tài chính</p>
+                        <h5 class="text-light">John Deo</h5>
+                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Assistant</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.5s">
                 <div class="team-item position-relative">
                     <div class="position-relative overflow-hidden rounded-circle rounded-bottom rounded-end">
-                        <img class="img-fluid w-100" src="img/anh3.jpg" alt="">
+                        <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
+                        <div class="team-overlay">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="position-absolute start-0 bottom-0 d-flex flex-column justify-content-center w-100 rounded-bottom text-center"
                         style="height: 100px; background: rgba(34, 36, 41, .9);">
-                        <h5 class="text-light">Thomas Rabe</h5>
-                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Chủ tịch Hội đồng Giám sát</p>
+                        <h5 class="text-light">John Deo</h5>
+                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Assistant</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Team End -->
-
-
-    <!-- Blog Start -->
-    <div class="container-fluid p-5">
-        <div class="mb-5 text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px; margin: auto;">
-            <h5 class="section-title">Our Blog</h5>
-            <h1 class="display-3 mb-0">Sản Phẩn Nổi Bật</h1>
-        </div>
-        <div class="row g-5">
-            @foreach ($products as $product)
-            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                <div class="blog-item">
-                    <div class="position-relative overflow-hidden rounded-top">
-                        <img class="img-fluid" src="{{ asset('storage/' . $product->img) }}" alt="{{ $product->name }}">
-                    </div>
-                    <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-                        <div class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
-                            <span>{{ $product->created_at->format('d') }}</span>
-                            <h6 class="text-primary text-uppercase mb-0">{{ $product->created_at->format('F') }}</h6>
-                            <span>{{ $product->created_at->format('Y') }}</span>
-                        </div>
-                        <a class="h5 lh-base text-light" href="{{ route('products.show', $product->id) }}">
-                            {{ $product->name }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-    <!-- Blog End -->
 
 
     <!-- Instagram Start -->
@@ -328,22 +305,22 @@
         </a>
         <div class="row g-0">
             <div class="col-lg-2 col-md-3 col-sm-4 wow fadeIn" data-wow-delay="0.1s">
-                <img class="img-fluid" src="img/normal(1).jpg" alt="">
+                <img class="img-fluid" src="img/menu-2.jpg" alt="">
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 wow fadeIn" data-wow-delay="0.2s">
-                <img class="img-fluid" src="img/normal(2).jpg" alt="">
+                <img class="img-fluid" src="img/menu-3.jpg" alt="">
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 wow fadeIn" data-wow-delay="0.3s">
-                <img class="img-fluid" src="img/normal(3).jpg" alt="">
+                <img class="img-fluid" src="img/menu-4.jpg" alt="">
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 wow fadeIn" data-wow-delay="0.4s">
-                <img class="img-fluid" src="img/normal(4).jpg" alt="">
+                <img class="img-fluid" src="img/menu-5.jpg" alt="">
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 wow fadeIn" data-wow-delay="0.5s">
-                <img class="img-fluid" src="img/normal(5).jpg" alt="">
+                <img class="img-fluid" src="img/menu-6.jpg" alt="">
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 wow fadeIn" data-wow-delay="0.6s">
-                <img class="img-fluid" src="img/normal.jpg" alt="">
+                <img class="img-fluid" src="img/menu-7.jpg" alt="">
             </div>
         </div>
     </div>
@@ -438,7 +415,7 @@
                 <div class="py-lg-4 text-center">
                     <p class="text-secondary mb-0">&copy; <a class="text-light fw-bold" href="#">Your Site Name</a>. All
                         Rights Reserved. Distributed by <a class="text-light fw-bold"
-                            href="https://themewagon.com">ThemeWagon</a></p>
+                        href="https://themewagon.com">ThemeWagon</a></p>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -446,7 +423,7 @@
                     <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                     <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                     <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                    <p class="text-light mb-0">Designed by <a class="text-light fw-bold" target="_blank"
+                    <p class="text-light mb-0">Designed by <a class="text-light fw-bold"
                             href="https://htmlcodex.com">HTML Codex</a></p>
                 </div>
             </div>
@@ -470,7 +447,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
 </body>
 
 </html>
