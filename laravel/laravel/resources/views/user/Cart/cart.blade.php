@@ -74,11 +74,6 @@
 
     <div class="container my-5">
         <h1 class="mb-4 text-center">Giỏ Hàng Của Bạn</h1>
-          @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
         @if ($cart && $cart->cartDetail->count() > 0)
             <div class="row">
                 <div class="col-lg-8">
@@ -115,7 +110,7 @@
                                         </p>
                                     </div>
                                     <div class="col-md-1 text-end">
-                                        <form action="{{ route('cart.destroy', ['id_detail' => $detail->id_detail]) }}" method="POST">
+                                        <form action="#" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" title="Xóa sản phẩm"><i

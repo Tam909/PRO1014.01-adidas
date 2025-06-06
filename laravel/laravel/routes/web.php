@@ -46,13 +46,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::resource('categories', CategoryController::class)->names('admin.category');
 
-   
+    // Thêm sản phẩm vào giỏ hàng
+    Route::post('/cart/add/{product}', [OrderController::class, 'addToCart'])->name('cart.add');
 });
 
- // Thêm sản phẩm vào giỏ hàng
-    Route::post('/cart/add/{product}', [OrderController::class, 'addToCart'])->name('cart.add');
-    // Xoa sản phẩm khỏi giỏ hàng
-    Route::delete('/cart/destroy/{id_detail}', [OrderController::class, 'destroy'])->name('cart.destroy');
 // Resource cho quản lý sản phẩm (trừ show)
 Route::prefix('admin')->group(function () {
     Route::resource('products', ProductController::class)->except(['show']);
