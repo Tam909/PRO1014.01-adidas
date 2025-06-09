@@ -11,14 +11,17 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="{{ asset('https://fonts.googleapis.com')  }}">
+    <link rel="preconnect" href="{{ asset('https://fonts.googleapis.com') }}">
     <link rel="preconnect" href="{{ asset('https://fonts.gstatic.com') }}" crossorigin>
-    <link href="{{ asset('https://fonts.googleapis.com/css2?family=Emblema+One&family=Poppins:wght@400;600&display=swap') }}"
+    <link
+        href="{{ asset('https://fonts.googleapis.com/css2?family=Emblema+One&family=Poppins:wght@400;600&display=swap') }}"
         rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet') }}">
-    <link href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet') }}">
+    <link
+        href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet') }}">
+    <link
+        href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet') }}">
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
@@ -33,7 +36,8 @@
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner"
+        class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
     <!-- Spinner End -->
@@ -49,7 +53,7 @@
                 </a>
             </div>
             <div class="col-lg-9">
-              
+
                 <nav class="navbar navbar-expand-lg navbar-dark p-3 p-lg-0 px-lg-5" style="background: #111111;">
                     <a href="index.html" class="navbar-brand d-block d-lg-none">
                         <h1 class="m-0 display-4 text-primary text-uppercase">Chefer</h1>
@@ -62,11 +66,14 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{ route('home')}}" class="nav-item nav-link active">Trang Chủ</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sản Phẩm</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sản
+                                    Phẩm</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="feature.html" class="dropdown-item">Bóng đá</a>
-                                    <a href="blog.html" class="dropdown-item">Chạy</a>
-                                    <a href="testimonial.html" class="dropdown-item">Bóng rổ</a>
+                                    @foreach ($categories as $category)
+                                        <a href="#" class="dropdown-item">
+                                            {{ $category->name }}
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
                             <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
@@ -75,28 +82,29 @@
                         </div>
                         <div class="d-none d-lg-flex align-items-center py-2">
                             @auth
-                            <li class="nav-item me-2">
-                              <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
-                            </li>
-                            <li class="nav-item me-2">
-                              @if(Auth::user()->role === 'admin')
-                                <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm">🔧 Quản trị</a>
-                              @endif
-                            </li>
-                            <li class="nav-item">
-                              <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button class="btn btn-outline-light btn-sm" type="submit">Đăng xuất</button>
-                              </form>
-                            </li>
-                          @else
-                            <li class="nav-item me-2">
-                              <a class="btn btn-outline-light btn-sm" href="{{ route('login') }}">Đăng nhập</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="btn btn-light btn-sm" href="{{ route('register') }}">Đăng ký</a>
-                            </li>
-                          @endauth
+                                <li class="nav-item me-2">
+                                    <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
+                                </li>
+                                <li class="nav-item me-2">
+                                    @if (Auth::user()->role === 'admin')
+                                        <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm">🔧 Quản
+                                            trị</a>
+                                    @endif
+                                </li>
+                                <li class="nav-item">
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button class="btn btn-outline-light btn-sm" type="submit">Đăng xuất</button>
+                                    </form>
+                                </li>
+                            @else
+                                <li class="nav-item me-2">
+                                    <a class="btn btn-outline-light btn-sm" href="{{ route('login') }}">Đăng nhập</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-light btn-sm" href="{{ route('register') }}">Đăng ký</a>
+                                </li>
+                            @endauth
                         </div>
                     </div>
                 </nav>
@@ -109,7 +117,7 @@
     <!-- Hero Start -->
     <div class="container-fluid p-5 mb-5 bg-dark text-secondary">
         <div class="row g-5 py-5">
-            <div class="mb-4 wow fadeIn text-center" data-wow-delay="0.2s" >
+            <div class="mb-4 wow fadeIn text-center" data-wow-delay="0.2s">
                 <h5 class="section-title ">FIND YOUR TEAM</h5>
                 <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
                     <img class="img-fluid rounded mb-3 " src="img/2.png">
@@ -127,13 +135,13 @@
                     <img class="img-fluid rounded mb-3 " src="img/6.png">
                 </a>
             </div>
-           
+
             <div class=" wow fadeIn" data-wow-delay="0.1s">
                 <img class="img-fluid rounded mb-3 " src="img/slide.gif" alt="">
-                <h3 class="text-center"  style="background-color: aliceblue"   >ADICOLOR</h3>
-                <p class="mb-0" >Biểu tượng không thể phủ nhận. Và chính bạn làm nên điều đó.</p>
+                <h3 class="text-center" style="background-color: aliceblue">ADICOLOR</h3>
+                <p class="mb-0">Biểu tượng không thể phủ nhận. Và chính bạn làm nên điều đó.</p>
             </div>
-        
+
         </div>
     </div>
     <!-- Hero End -->
@@ -153,14 +161,16 @@
                     <h5 class="section-title">Adidas</h5>
                     <h1 class="display-3 mb-0">Adidas mang đến trải nghiệm và trách nhiệm</h1>
                 </div>
-                <p class="mb-4 wow fadeIn" data-wow-delay="0.3s">Thể thao nâng cao sức khoẻ. Giúp bạn luôn tĩnh tâm. 
-                    Kết nối chúng ta. Thông qua thể thao, chúng ta có sức mạnh để thay đổi cuộc sống—bằng những câu chuyện 
+                <p class="mb-4 wow fadeIn" data-wow-delay="0.3s">Thể thao nâng cao sức khoẻ. Giúp bạn luôn tĩnh tâm.
+                    Kết nối chúng ta. Thông qua thể thao, chúng ta có sức mạnh để thay đổi cuộc sống—bằng những câu
+                    chuyện
                     về các vận động viên truyền cảm hứng, công nghệ đột phá và bằng cách giúp bạn đứng lên và vận động.
                 </p>
                 <div class="row">
                     <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
                         <div class="bg-light rounded p-4">
-                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/a.avif" style="width: 80px; height: 80px;">
+                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/a.avif"
+                                style="width: 80px; height: 80px;">
                             <h4>Sale 70 %</h4>
                             <p class="mb-0">
                                 Tri ân khách hàng với chương trình giảm giá lên đến 70% cho các sản phẩm thể thao.
@@ -169,9 +179,11 @@
                     </div>
                     <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
                         <div class="bg-light rounded p-4">
-                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/7.jpg" style="width: 80px; height: 80px;">
+                            <img class="img-fluid bg-primary rounded-circle mb-3" src="img/7.jpg"
+                                style="width: 80px; height: 80px;">
                             <h4>Adidas QA68</h4>
-                            <p class="mb-0">Sản phẩm mới mang lại cảm giác chân thân và mềm mại hơn từ nhà chúng tôi</p>
+                            <p class="mb-0">Sản phẩm mới mang lại cảm giác chân thân và mềm mại hơn từ nhà chúng tôi
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -225,17 +237,20 @@
     <div class="container-fluid feature position-relative p-5 pb-0 mt-5">
         <div class="row g-3 gb-3">
             @foreach ($products->take(3) as $product)
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                  <img src="{{ asset('storage/' . $product->img) }}" class="card-img-top" alt="{{ $product->name }}">
-                  <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p class="card-text text-danger fw-bold">{{ number_format($product->price, 0, ',', '.') }}₫</p>
-                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary mt-auto">Xem chi tiết</a>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ asset('storage/' . $product->img) }}" class="card-img-top"
+                            alt="{{ $product->name }}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-text text-danger fw-bold">
+                                {{ number_format($product->price, 0, ',', '.') }}₫</p>
+                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary mt-auto">Xem
+                                chi tiết</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
         </div>
     </div>
     <!-- Feature End -->
@@ -256,7 +271,8 @@
                     <div class="position-absolute start-0 bottom-0 d-flex flex-column justify-content-center w-100  rounded-bottom text-center"
                         style="height: 100px;  background: rgba(34, 36, 41, .9);">
                         <h5 class="text-light">Bjørn Gulden</h5>
-                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Tổng Giám đốc Điều hành</p>
+                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Tổng Giám đốc
+                            Điều hành</p>
                     </div>
                 </div>
             </div>
@@ -264,12 +280,13 @@
                 <div class="team-item position-relative">
                     <div class="position-relative overflow-hidden rounded-circle rounded-bottom rounded-end">
                         <img class="img-fluid w-100" src="img/anh2.jpg" alt="">
-                      
+
                     </div>
                     <div class="position-absolute start-0 bottom-0 d-flex flex-column justify-content-center w-100 rounded-bottom text-center"
                         style="height: 100px; background: rgba(34, 36, 41, .9);">
                         <h5 class="text-light">Harm Ohlmeyer </h5>
-                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Giám đốc Tài chính</p>
+                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Giám đốc Tài
+                            chính</p>
                     </div>
                 </div>
             </div>
@@ -281,7 +298,8 @@
                     <div class="position-absolute start-0 bottom-0 d-flex flex-column justify-content-center w-100 rounded-bottom text-center"
                         style="height: 100px; background: rgba(34, 36, 41, .9);">
                         <h5 class="text-light">Thomas Rabe</h5>
-                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Chủ tịch Hội đồng Giám sát</p>
+                        <p class="small text-uppercase text-secondary m-0" style="letter-spacing: 3px;">Chủ tịch Hội
+                            đồng Giám sát</p>
                     </div>
                 </div>
             </div>
@@ -298,23 +316,26 @@
         </div>
         <div class="row g-5">
             @foreach ($products as $product)
-            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                <div class="blog-item">
-                    <div class="position-relative overflow-hidden rounded-top">
-                        <img class="img-fluid" src="{{ asset('storage/' . $product->img) }}" alt="{{ $product->name }}">
-                    </div>
-                    <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-                        <div class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
-                            <span>{{ $product->created_at->format('d') }}</span>
-                            <h6 class="text-primary text-uppercase mb-0">{{ $product->created_at->format('F') }}</h6>
-                            <span>{{ $product->created_at->format('Y') }}</span>
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="blog-item">
+                        <div class="position-relative overflow-hidden rounded-top">
+                            <img class="img-fluid" src="{{ asset('storage/' . $product->img) }}"
+                                alt="{{ $product->name }}">
                         </div>
-                        <a class="h5 lh-base text-light" href="{{ route('products.show', $product->id) }}">
-                            {{ $product->name }}
-                        </a>
+                        <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
+                            <div
+                                class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
+                                <span>{{ $product->created_at->format('d') }}</span>
+                                <h6 class="text-primary text-uppercase mb-0">{{ $product->created_at->format('F') }}
+                                </h6>
+                                <span>{{ $product->created_at->format('Y') }}</span>
+                            </div>
+                            <a class="h5 lh-base text-light" href="{{ route('products.show', $product->id) }}">
+                                {{ $product->name }}
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>
@@ -323,7 +344,9 @@
 
     <!-- Instagram Start -->
     <div class="container-fluid position-relative instagram p-0 mt-5">
-        <a href="" class="d-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle bg-white rounded-circle" style="width: 100px; height: 100px; z-index: 1;">
+        <a href=""
+            class="d-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle bg-white rounded-circle"
+            style="width: 100px; height: 100px; z-index: 1;">
             <i class="fab fa-instagram fa-2x text-secondary"></i>
         </a>
         <div class="row g-0">
@@ -436,7 +459,8 @@
         <div class="row gx-5">
             <div class="col-lg-8">
                 <div class="py-lg-4 text-center">
-                    <p class="text-secondary mb-0">&copy; <a class="text-light fw-bold" href="#">Your Site Name</a>. All
+                    <p class="text-secondary mb-0">&copy; <a class="text-light fw-bold" href="#">Your Site
+                            Name</a>. All
                         Rights Reserved. Distributed by <a class="text-light fw-bold"
                             href="https://themewagon.com">ThemeWagon</a></p>
                 </div>

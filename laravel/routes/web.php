@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Product\ProductController;
 
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\CheckoutController;
 use App\Http\Controllers\User\Product\ProductController as ProductProductController;
 
 // Đăng ký và đăng nhập
@@ -45,11 +46,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Quản lý danh mục
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::resource('categories', CategoryController::class)->names('admin.category');
-
-    // Thêm sản phẩm vào giỏ hàng
-    Route::post('/cart/add/{product}', [OrderController::class, 'addToCart'])->name('cart.add');
 });
 
+// Thêm sản phẩm vào giỏ hàng
+Route::post('/cart/add/{product}', [OrderController::class, 'addToCart'])->name('cart.add');
+// Xoa sản phẩm khỏi giỏ hàng
+Route::delete('/cart/destroy/{id_detail}', [OrderController::class, 'destroy'])->name('cart.destroy');
 // Resource cho quản lý sản phẩm (trừ show)
 Route::prefix('admin')->group(function () {
     Route::resource('products', ProductController::class)->except(['show']);
@@ -65,3 +67,13 @@ Route::get('/product/list', [ProductController::class, 'list'])->name('products.
 
 // Hiển thị giỏ hàng
 Route::get('/cart', [OrderController::class, 'showCart'])->name('carts.index')->middleware('auth');
+
+Route::get('/checkout', [CheckoutController::class, 'showForm'])->name('checkout.index');
+
+
+
+Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+
+
+
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
