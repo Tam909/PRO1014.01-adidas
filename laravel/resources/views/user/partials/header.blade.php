@@ -35,6 +35,13 @@
                             <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
                             <a href="contact.html" class="nav-item nav-link">Giới Thiệu</a>
                             <a href="contact.html" class="nav-item nav-link">Các Nhãn Hiệu</a>
+                            <a href="{{ route('carts.index') }}" class="nav-item nav-link">
+                                Giỏ Hàng
+                                @if (session('cart'))
+                                    <span class="badge bg-warning text-dark ms-1">
+                                        {{ session('cart')->cartDetail->count() }}
+                                    </span>
+                                @endif
                         </div>
                         <div class="d-none d-lg-flex align-items-center py-2">
     <ul class="navbar-nav flex-row align-items-center m-0">

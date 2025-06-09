@@ -17,7 +17,7 @@ class ProductController extends Controller{
         // Hoặc lấy tất cả sản phẩm hoạt động
         $products = Product::where('status', 0)->get();
     
-        return view('home', compact('products','categories', 'featuredProducts'));
+       return view('home', compact('products', 'categories', 'featuredProducts'));
     }
     
     function show($id)
