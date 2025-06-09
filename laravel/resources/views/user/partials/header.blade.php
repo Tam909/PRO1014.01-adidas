@@ -38,11 +38,6 @@
                         </div>
                         <div class="d-none d-lg-flex align-items-center py-2">
     <ul class="navbar-nav flex-row align-items-center m-0">
-    <li class="nav-item">
-    <a href="{{ route('carts.index') }}" class="nav-item nav-link">
-        <i class="fas fa-shopping-cart me-1"></i> Giỏ Hàng
-    </a>
-</li>
         @auth
             <li class="nav-item me-3">
                 <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>

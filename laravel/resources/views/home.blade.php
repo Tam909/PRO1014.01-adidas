@@ -77,7 +77,6 @@
                                     @endforeach
                                 </div>
                             </div>
-
                             <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
                             <a href="contact.html" class="nav-item nav-link">Giới Thiệu</a>
                             <a href="contact.html" class="nav-item nav-link">Các Nhãn Hiệu</a>

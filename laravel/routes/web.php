@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Controllers\Admin\AdminController; 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -43,7 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
     // Quản lý danh mục
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::resource('categories', CategoryController::class)->names('admin.category');
 
    
@@ -63,6 +63,8 @@ Route::get('/', [ProductProductController::class, 'index'])->name('home');
 
 // Trang chi tiết sản phẩm
 Route::get('/products/{id}', [ProductProductController::class, 'show'])->name('products.show');
+// Danh sách sản phẩm 
+Route::get('/product/list', [ProductController::class, 'list'])->name('products.list');
 
 // Hiển thị giỏ hàng
 Route::get('/cart', [OrderController::class, 'showCart'])->name('carts.index')->middleware('auth');
