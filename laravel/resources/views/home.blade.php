@@ -47,7 +47,7 @@
     <div class="container-fluid bg-dark px-0">
         <div class="row gx-0 wow fadeIn" data-wow-delay="0.1s">
             <div class="col-lg-3 bg-primary d-none d-lg-block">
-                <a href="index.html"
+                <a href="{{ route('home') }}"
                     class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
                     <h1 class="m-0 display-4 text-white text-uppercase">Adidas</h1>
                 </a>
@@ -81,33 +81,40 @@
                             <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
                             <a href="contact.html" class="nav-item nav-link">Giới Thiệu</a>
                             <a href="contact.html" class="nav-item nav-link">Các Nhãn Hiệu</a>
+                        
+    <a href="{{ route('carts.index') }}" class="nav-item nav-link">
+        <i class="fas fa-shopping-cart me-1"></i> Giỏ Hàng
+    </a>
                         </div>
                         <div class="d-none d-lg-flex align-items-center py-2">
-                            @auth
-                                <li class="nav-item me-2">
-                                    <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
-                                </li>
-                                <li class="nav-item me-2">
-                                    @if (Auth::user()->role === 'admin')
-                                        <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm">🔧 Quản
-                                            trị</a>
-                                    @endif
-                                </li>
-                                <li class="nav-item">
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button class="btn btn-outline-light btn-sm" type="submit">Đăng xuất</button>
-                                    </form>
-                                </li>
-                            @else
-                                <li class="nav-item me-2">
-                                    <a class="btn btn-outline-light btn-sm" href="{{ route('login') }}">Đăng nhập</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="btn btn-light btn-sm" href="{{ route('register') }}">Đăng ký</a>
-                                </li>
-                            @endauth
-                        </div>
+    <ul class="navbar-nav flex-row align-items-center m-0">
+    
+        @auth
+            <li class="nav-item me-3">
+                <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
+            </li>
+            @if (Auth::user()->role === 'admin')
+                <li class="nav-item me-3">
+                    <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm">🔧 Quản trị</a>
+                </li>
+            @endif
+            <li class="nav-item">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn btn-outline-light btn-sm" type="submit">Đăng xuất</button>
+                </form>
+            </li>
+        @else
+            <li class="nav-item me-2">
+                <a class="btn btn-outline-light btn-sm" href="{{ route('login') }}">Đăng nhập</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-light btn-sm" href="{{ route('register') }}">Đăng ký</a>
+            </li>
+        @endauth
+    </ul>
+</div>
+
                     </div>
                 </nav>
             </div>
@@ -119,24 +126,28 @@
     <!-- Hero Start -->
     <div class="container-fluid p-5 mb-5 bg-dark text-secondary">
         <div class="row g-5 py-5">
-            <div class="mb-4 wow fadeIn text-center" data-wow-delay="0.2s">
-                <h5 class="section-title ">FIND YOUR TEAM</h5>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/2.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/3.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/4.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/5.png">
-                </a>
-                <a class="btn btn-outline-secondary btn-square rounded-circle ms-2" href="">
-                    <img class="img-fluid rounded mb-3 " src="img/6.png">
-                </a>
-            </div>
+          <div class="mb-4 wow fadeIn text-center" data-wow-delay="0.2s">
+    <h5 class="section-title">FIND YOUR TEAM</h5>
+    <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+        <a class="btn btn-outline-secondary btn-square rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" href="#">
+            <img class="img-fluid rounded-circle" src="img/2.png" alt="Team 1" style="width: 28px; height: 28px;">
+        </a>
+        <a class="btn btn-outline-secondary btn-square rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" href="#">
+            <img class="img-fluid rounded-circle" src="img/3.png" alt="Team 2" style="width: 28px; height: 28px;">
+        </a>
+        <a class="btn btn-outline-secondary btn-square rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" href="#">
+            <img class="img-fluid rounded-circle" src="img/4.png" alt="Team 3" style="width: 28px; height: 28px;">
+        </a>
+        <a class="btn btn-outline-secondary btn-square rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" href="#">
+            <img class="img-fluid rounded-circle" src="img/5.png" alt="Team 4" style="width: 28px; height: 28px;">
+        </a>
+        <a class="btn btn-outline-secondary btn-square rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" href="#">
+            <img class="img-fluid rounded-circle" src="img/6.png" alt="Team 5" style="width: 28px; height: 28px;">
+        </a>
+    </div>
+</div>
+
+
 
             <div class=" wow fadeIn" data-wow-delay="0.1s">
                 <img class="img-fluid rounded mb-3 " src="img/slide.gif" alt="">
