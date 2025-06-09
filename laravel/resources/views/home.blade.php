@@ -47,7 +47,7 @@
     <div class="container-fluid bg-dark px-0">
         <div class="row gx-0 wow fadeIn" data-wow-delay="0.1s">
             <div class="col-lg-3 bg-primary d-none d-lg-block">
-                <a href="index.html"
+                <a href="{{ route('home') }}"
                     class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
                     <h1 class="m-0 display-4 text-white text-uppercase">Adidas</h1>
                 </a>
@@ -64,8 +64,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{{ route('home') }}" class="nav-item nav-link active">Trang Chủ</a>
-                            
+                            <a href="{{ route('home')}}" class="nav-item nav-link active">Trang Chủ</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sản
                                     Phẩm</a>
@@ -77,7 +76,6 @@
                                     @endforeach
                                 </div>
                             </div>
-
                             <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
                             <a href="contact.html" class="nav-item nav-link">Giới Thiệu</a>
                             <a href="contact.html" class="nav-item nav-link">Các Nhãn Hiệu</a>
