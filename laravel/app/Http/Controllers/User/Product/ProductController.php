@@ -23,6 +23,11 @@ class ProductController extends Controller{
         $product = Product::findOrFail($id);
         return view('user.ProductsUser.show', compact('product'));
     }
+    public function list()
+    {
+        $product = Product::all(); // hoặc phân trang: Product::paginate(12);
+        return view('user.ProductUset.list', compact('products'));
+    }
 
 }
 ?>
