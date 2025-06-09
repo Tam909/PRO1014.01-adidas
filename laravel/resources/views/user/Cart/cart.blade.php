@@ -74,6 +74,11 @@
 
     <div class="container my-5">
         <h1 class="mb-4 text-center">Giỏ Hàng Của Bạn</h1>
+          @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
         @if ($cart && $cart->cartDetail->count() > 0)
             <div class="row">
                 <div class="col-lg-8">
@@ -110,7 +115,7 @@
                                         </p>
                                     </div>
                                     <div class="col-md-1 text-end">
-                                        <form action="#" method="POST">
+                                        <form action="{{ route('cart.destroy', ['id_detail' => $detail->id_detail]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" title="Xóa sản phẩm"><i
@@ -151,7 +156,7 @@
                                 <span>{{ number_format($cart->total_money, 0, ',', '.') }}₫</span>
                             </li>
                         </ul>
-                        <a href="{{ route('checkout.index') }}" class="btn btn-success btn-lg w-100 mb-2">Tiến hành đặt hàng</a>
+                        <a href="#" class="btn btn-success btn-lg w-100 mb-2">Tiến hành đặt hàng</a>
                         <a href="{{ route('home') }}" class="btn btn-outline-primary w-100">Tiếp tục mua sắm</a>
                     </div>
                 </div>
