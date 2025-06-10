@@ -32,4 +32,3 @@ class ProductController extends Controller{
     }
 
 }
-?>

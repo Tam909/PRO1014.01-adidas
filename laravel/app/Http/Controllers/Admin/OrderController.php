@@ -5,16 +5,49 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.orders');
+        $orders = Order::with(['orderItems.product'])
+            ->orderBy('create_at', 'desc')
+            ->paginate(10);
+
+        session(['orders_page' => $request->get('page', 1)]);
+
+        return view('admin.orders', compact('orders'));
     }
+
+    public function confirm($id)
+    {
+        $order = Order::findOrFail($id);
+
+        if ($order->status_order == 0) {
+            // Đang chờ → chuyển sang đang giao
+            $order->status_order = 1;
+            $message = 'Đơn hàng đang được giao.';
+        } elseif ($order->status_order == 1) {
+            // Đang giao → chuyển sang hoàn thành
+            $order->status_order = 2;
+            $message = 'Đơn hàng đã hoàn thành.';
+        } else {
+            $message = 'Đơn hàng đã được xử lý xong.';
+        }
+
+        $order->save();
+
+
+        $page = session('orders_page', 1);
+
+
+        return redirect()->route('orders.index', ['page' => $page])->with('success', $message);
+    }
+
 
     public function showCart()
     {

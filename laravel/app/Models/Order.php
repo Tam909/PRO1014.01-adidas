@@ -33,6 +33,10 @@ class Order extends Model
 
     public function orderItems()
     {
+<<<<<<< HEAD
         return $this->hasMany(OrderItem::class, 'id_order', 'id_order');
+=======
+        return $this->hasMany(OrderItem::class, 'order_id', 'id_order');
+>>>>>>> 26d10af666f16deb84d1a7ba6e19a3932f1a5d58
     }
 }
