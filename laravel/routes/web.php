@@ -36,6 +36,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Quản lý đơn hàng
     Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
 
+    Route::post('/orders/confirm/{id}', [OrderController::class, 'confirm'])->name('orders.confirm');
+
     // Quản lý người dùng
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
