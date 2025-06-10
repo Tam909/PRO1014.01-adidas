@@ -44,7 +44,8 @@
                                 @endif
                         </div>
                         <div class="d-none d-lg-flex align-items-center py-2">
-    <ul class="navbar-nav flex-row align-items-center m-0">
+   <ul class="navbar-nav flex-row align-items-center m-0">
+    
         @auth
             <li class="nav-item me-3">
                 <span class="text-white">👋 Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
