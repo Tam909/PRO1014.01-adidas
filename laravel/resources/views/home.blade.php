@@ -56,7 +56,7 @@
 
                 <nav class="navbar navbar-expand-lg navbar-dark p-3 p-lg-0 px-lg-5" style="background: #111111;">
                     <a href="index.html" class="navbar-brand d-block d-lg-none">
-                        <h1 class="m-0 display-4 text-primary text-uppercase">Chefer</h1>
+                        <h1 class="m-0 display-4 text-primary text-uppercase">Adidas</h1>
                     </a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
@@ -64,24 +64,22 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{{ route('home') }}" class="nav-item nav-link active">Trang Chủ</a>
-                            
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sản
-                                    Phẩm</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    @foreach ($categories as $category)
-                                        <a href="#" class="dropdown-item">
-                                            {{ $category->name }}
-                                        </a>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
-                            <a href="contact.html" class="nav-item nav-link">Giới Thiệu</a>
-                            <a href="contact.html" class="nav-item nav-link">Các Nhãn Hiệu</a>
+                            {{-- Trang Chủ --}}
+                            <a href="{{ route('home') }}" class="nav-item nav-link @if(Route::currentRouteNamed('home')) active @endif">Trang Chủ</a>
                         
-    <a href="{{ route('carts.index') }}" class="nav-item nav-link">
+                            {{-- Sản Phẩm --}}
+                            {{-- Điều kiện cho 'Sản Phẩm' cần phức tạp hơn một chút vì nó bao gồm cả list và category --}}
+                            <a href="{{ route('products.list') }}" class="nav-item nav-link @if(Route::currentRouteNamed('products.list') || Route::currentRouteNamed('products.by_category') || Route::currentRouteNamed('products.show')) active @endif">Sản Phẩm</a>
+                        
+                            {{-- Liên Hệ --}}
+                            <a href="{{ route('contact.show') }}" class="nav-item nav-link @if(Route::currentRouteNamed('contact.show')) active @endif">Liên Hệ</a>
+                        
+                            {{-- Giới Thiệu (Giả sử bạn có route tên 'about') --}}
+                            <a href="{{ route('about') }}" class="nav-item nav-link @if(Route::currentRouteNamed('about')) active @endif">Giới Thiệu</a>
+                        
+                            {{-- Các Nhãn Hiệu (Giả sử bạn có route tên 'brands') --}}
+                            {{-- <a href="{{ route('brands') }}" class="nav-item nav-link @if(Route::currentRouteNamed('brands')) active @endif">Các Nhãn Hiệu</a> --}}
+                            <a href="{{ route('carts.index') }}" class="nav-item nav-link">
         <i class="fas fa-shopping-cart me-1"></i> Giỏ Hàng
     </a>
                         </div>

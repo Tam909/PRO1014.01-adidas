@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\CheckoutController;
 use App\Http\Controllers\User\Product\ProductController as ProductProductController;
+use App\Models\Product;
 
 // Đăng ký và đăng nhập
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -52,10 +53,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::post('/cart/add/{product}', [OrderController::class, 'addToCart'])->name('cart.add');
 // Xoa sản phẩm khỏi giỏ hàng
 Route::delete('/cart/destroy/{id_detail}', [OrderController::class, 'destroy'])->name('cart.destroy');
-// Resource cho quản lý sản phẩm (trừ show)
-Route::prefix('admin')->group(function () {
-    Route::resource('products', ProductController::class)->except(['show']);
-});
+
+
+//// USER ///
+
 
 // Người dùng - Trang chủ
 Route::get('/', [ProductProductController::class, 'index'])->name('home');
@@ -63,17 +64,16 @@ Route::get('/', [ProductProductController::class, 'index'])->name('home');
 // Trang chi tiết sản phẩm
 Route::get('/products/{id}', [ProductProductController::class, 'show'])->name('products.show');
 // Danh sách sản phẩm 
-Route::get('/product/list', [ProductController::class, 'list'])->name('products.list');
-
+Route::get('/products', [ProductProductController::class, 'list'])->name('products.list');
+// Danh sách sản phẩm theo danh mục (ROUTE MỚI)
+Route::get('/products/category/{id}', [ProductProductController::class, 'productsByCategory'])->name('products.by_category');
+// --- CÁC ROUTES CHO TRANG LIÊN HỆ (sử dụng UserProductController) ---
+Route::get('/contact', [ProductProductController::class, 'showContactForm'])->name('contact.show');
+Route::post('/contact', [ProductProductController::class, 'submitContactForm'])->name('contact.submit');
+// --- ROUTE MỚI CHO TRANG GIỚI THIỆU ---
+Route::get('/about', [ProductProductController::class, 'showAboutPage'])->name('about');
 // Hiển thị giỏ hàng
 Route::get('/cart', [OrderController::class, 'showCart'])->name('carts.index')->middleware('auth');
-
 Route::get('/checkout', [CheckoutController::class, 'showForm'])->name('checkout.index');
-
-
-
 Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
-
-
-
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
