@@ -11,10 +11,9 @@ class ProductController extends Controller{
     public function index()
     {
         $categories = Category::all();
-        // Chỉ lấy sản phẩm đang hoạt động (status = 0)
         $featuredProducts = Product::where('status', 0)->take(3)->get();
     
-        // Hoặc lấy tất cả sản phẩm hoạt động
+
         $products = Product::where('status', 0)->get();
     
        return view('home', compact('products', 'categories', 'featuredProducts'));
@@ -27,7 +26,7 @@ class ProductController extends Controller{
     }
     public function list()
     {
-        $product = Product::all(); // hoặc phân trang: Product::paginate(12);
+        $product = Product::all(); 
         return view('user.ProductUset.list', compact('products'));
     }
 

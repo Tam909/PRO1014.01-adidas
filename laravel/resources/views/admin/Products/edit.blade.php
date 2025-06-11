@@ -49,6 +49,32 @@
                 <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Không hoạt động</option>
             </select>
         </div>
+        <div class="mb-3">
+    <label>Chọn màu</label>
+    <div class="form-check">
+        @foreach(\App\Models\Color::all() as $color)
+            <input type="checkbox" name="colors[]" value="{{ $color->id }}"
+                   class="form-check-input"
+                   id="color_{{ $color->id }}"
+                   {{ $product->variants->pluck('id_color')->contains($color->id) ? 'checked' : '' }}>
+            <label for="color_{{ $color->id }}" class="form-check-label">{{ $color->name }}</label><br>
+        @endforeach
+    </div>
+</div>
+
+<div class="mb-3">
+    <label>Chọn size</label>
+    <div class="form-check">
+        @foreach(\App\Models\Size::all() as $size)
+            <input type="checkbox" name="sizes[]" value="{{ $size->id }}"
+                   class="form-check-input"
+                   id="size_{{ $size->id }}"
+                   {{ $product->variants->pluck('id_size')->contains($size->id) ? 'checked' : '' }}>
+            <label for="size_{{ $size->id }}" class="form-check-label">{{ $size->name }}</label><br>
+        @endforeach
+    </div>
+</div>
+
 
         <button class="btn btn-primary">Cập nhật</button>
     </form>

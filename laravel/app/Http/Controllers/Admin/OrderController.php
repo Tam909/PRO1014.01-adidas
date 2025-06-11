@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Varianti;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,9 +53,8 @@ class OrderController extends Controller
     public function showCart()
     {
         $user = Auth::user();
-        $cart = Cart::with(['cartDetail.product'])
-            // ->where('id_user', auth()->id())
-            // ->first();
+        $cart = Cart::with(['cartDetail.varianti.color', 'cartDetail.varianti.size','cartDetail.product'])
+           
             ->where('id_user', $user->id)
             ->where('status', 0)
             ->first();
@@ -62,44 +62,67 @@ class OrderController extends Controller
         return view('user.Cart.cart', compact('cart'));
     }
 
-    public function addtoCart(Request $request, $productId)
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
-        }
-
-        $userId = Auth::id();
-        $product = Product::findOrFail($productId);
-
-        $cart = Cart::firstOrCreate(
-            ['id_user' => $userId, 'status' => 0],
-            ['total_money' => 0]
-        );
-
-        $quantity = $request->input('quantity', 1);
-
-        $cartDetail = CartDetail::where('id_cart', $cart->id)
-            ->where('id_pro', $productId)
-            ->first();
-
-        if ($cartDetail) {
-            $cartDetail->quantity += $quantity;
-            $cartDetail->total_money = $cartDetail->quantity * $cartDetail->money;
-            $cartDetail->save();
-        } else {
-            CartDetail::create([
-                'id_cart' => $cart->id_cart,
-                'id_pro' => $product->id,
-                'quantity' => $quantity,
-                'money' => $product->price,
-                'total_money' => $product->price * $quantity,
-            ]);
-        }
-        $cart->total_money = CartDetail::where('id_cart', $cart->id_cart)
-            ->sum('total_money');
-        $cart->save();
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
+   public function addtoCart(Request $request, $productId)
+{
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
     }
+
+    $userId = Auth::id();
+    $product = Product::findOrFail($productId);
+
+    // 🆕 Lấy color_id và size_id từ form
+    $colorId = $request->input('color_id');
+    $sizeId = $request->input('size_id');
+    $quantity = $request->input('quantity', 1);
+
+    // 🆕 Tìm variant phù hợp
+    $variant = Varianti::where('id_pro', $productId)
+        ->where('id_color', $colorId)
+        ->where('id_size', $sizeId)
+        ->first();
+
+    if (!$variant) {
+        return redirect()->back()->with('error', 'Không tìm thấy biến thể phù hợp với màu và size bạn chọn.');
+    }
+
+    $variantId = $variant->id_var;
+    $price = $variant->price;
+
+    // 🛒 Tìm hoặc tạo giỏ hàng
+    $cart = Cart::firstOrCreate(
+        ['id_user' => $userId, 'status' => 0],
+        ['total_money' => 0]
+    );
+
+    // 🧾 Kiểm tra nếu sản phẩm đã có trong giỏ thì cộng thêm
+    $cartDetail = CartDetail::where('id_cart', $cart->id_cart)
+        ->where('id_pro', $productId)
+        ->where('varianti_id', $variantId)
+        ->first();
+
+    if ($cartDetail) {
+        $cartDetail->quantity += $quantity;
+        $cartDetail->total_money = $cartDetail->quantity * $price;
+        $cartDetail->save();
+    } else {
+        CartDetail::create([
+            'id_cart' => $cart->id_cart,
+            'id_pro' => $product->id,
+            'varianti_id' => $variantId,
+            'quantity' => $quantity,
+            'money' => $price,
+            'total_money' => $price * $quantity,
+        ]);
+    }
+
+    // 🔄 Cập nhật tổng tiền giỏ hàng
+    $cart->total_money = CartDetail::where('id_cart', $cart->id_cart)->sum('total_money');
+    $cart->save();
+
+    return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
+}
+
 
     public function destroy($id_detail)
     {

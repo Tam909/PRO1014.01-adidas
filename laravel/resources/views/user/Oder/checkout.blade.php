@@ -98,20 +98,28 @@
         </div>
         <div class="card-body">
           @if($cart && $cart->cartDetail->count() > 0)
-            @foreach($cart->cartDetail as $item)
-            <div class="d-flex align-items-center mb-3 border-bottom pb-2">
-              <img src="{{ optional($item->product)->image ?? 'https://via.placeholder.com/80' }}" alt="{{ optional($item->product)->name }}"
-                class="img-thumbnail me-3" style="width: 80px; height: 80px; object-fit: cover;">
-              <div class="flex-grow-1">
-                <h6 class="mb-1">{{ optional($item->product)->name }}</h6>
-                <small class="text-muted">Size {{ $item->size ?? 'N/A' }} | Màu {{ $item->color ?? 'N/A' }}</small>
-                <div class="mt-1 text-primary fw-semibold">
-                  {{ number_format($item->money, 0, ',', '.') }}₫ × {{ $item->quantity }} =
-                  {{ number_format($item->total_money, 0, ',', '.') }}₫
-                </div>
-              </div>
-            </div>
-            @endforeach
+           @foreach($cart->cartDetail as $item)
+@php
+  $variant = $item->varianti;
+  $product = $item->product;
+@endphp
+<div class="d-flex align-items-center mb-3 border-bottom pb-2">
+   <img src="{{ $item->product && $item->product->img ? asset('storage/' . $item->product->img) : 'https://via.placeholder.com/80' }}"
+     alt="{{ $item->product->name }}" class="img-thumbnail me-3" style="width: 80px; height: 80px; object-fit: cover;">
+
+  <div class="flex-grow-1">
+    <h6 class="mb-1">{{ $product->name }}</h6>
+    <small class="text-muted">
+      Size: {{ $variant->size->name ?? 'N/A' }} |
+      Màu: {{ $variant->color->name ?? 'N/A' }}
+    </small>
+    <div class="mt-1 text-primary fw-semibold">
+      {{ number_format($item->money, 0, ',', '.') }}₫ × {{ $item->quantity }} =
+      {{ number_format($item->total_money, 0, ',', '.') }}₫
+    </div>
+  </div>
+</div>
+@endforeach
             <hr>
             <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
               <span>Tổng cộng:</span>

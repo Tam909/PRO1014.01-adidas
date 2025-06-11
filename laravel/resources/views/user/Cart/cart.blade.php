@@ -73,8 +73,12 @@
                                 <img src="{{ $detail->product && $detail->product->img ? asset('storage/' . $detail->product->img) : 'https://via.placeholder.com/100' }}"
                                      alt="{{ $detail->product->name }}" class="img-fluid cart-item-image">
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5">  
                                 <h5>{{ $detail->product->name }}</h5>
+                                 @if($detail->varianti)
+        <p class="text-muted mb-0">Size: {{ $detail->varianti->size->name ?? 'N/A' }}</p>
+        <p class="text-muted mb-0">Màu: {{ $detail->varianti->color->name ?? 'N/A' }}</p>
+    @endif
                                 <p class="text-muted mb-0">Giá: {{ number_format($detail->money, 0, ',', '.') }}₫</p>
                             </div>
                             <div class="col-md-2">

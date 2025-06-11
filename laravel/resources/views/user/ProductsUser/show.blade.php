@@ -29,14 +29,43 @@
                 </p>
 
                 <form method="POST" action="{{ route('cart.add', $product->id) }}">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label">Số lượng</label>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1"
-                            class="form-control" style="max-width: 100px;">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
-                </form>
+    @csrf
+
+    {{-- Chọn màu --}}
+    <div class="mb-3">
+        <label for="color_id" class="form-label">Chọn màu:</label>
+        <select name="color_id" id="color_id" class="form-select" required>
+            <option value="">-- Chọn màu --</option>
+            @foreach ($product->variants->unique('id_color') as $variant)
+                <option value="{{ $variant->id_color }}">
+                    {{ $variant->color->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    {{-- Chọn size --}}
+    <div class="mb-3">
+        <label for="size_id" class="form-label">Chọn size:</label>
+        <select name="size_id" id="size_id" class="form-select" required>
+            <option value="">-- Chọn size --</option>
+            @foreach ($product->variants->unique('id_size') as $variant)
+                <option value="{{ $variant->id_size }}">
+                    {{ $variant->size->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    {{-- Số lượng --}}
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Số lượng</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1"
+            class="form-control" style="max-width: 100px;">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+</form> 
 
             </div>
         </div>

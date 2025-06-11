@@ -45,6 +45,30 @@
             </select>
         </div>
 
+       <div class="mb-3">
+    <label>Chọn các màu:</label>
+    <div class="row">
+        @foreach($colors as $color)
+            <div class="col-md-2">
+                <input type="checkbox" name="colors[]" value="{{ $color->id }}"> {{ $color->name }}
+            </div>
+        @endforeach
+    </div>
+</div>
+
+<div class="mb-3">
+    <label>Chọn các size:</label>
+    <div class="row" id="size-options">
+        @foreach($sizes as $size)
+            <div class="col-md-2">
+                <input type="checkbox" name="sizes[]" value="{{ $size->id }}"> {{ $size->name }}
+            </div>
+        @endforeach
+    </div>
+</div>
+
+
+
         <button class="btn btn-success">Thêm</button>
     </form>
 </div>
