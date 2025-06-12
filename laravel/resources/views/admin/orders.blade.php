@@ -45,67 +45,83 @@
                             @if($order->status_order == 0)
                             <span class="badge bg-warning text-dark">⏳ Chờ xác nhận</span>
                             @elseif($order->status_order == 1)
-                            <span class="badge bg-info text-dark">🚚 Đang giao</span>
+                            <span class="badge bg-primary">✅ Đã xác nhận</span>
                             @elseif($order->status_order == 2)
-                            <span class="badge bg-success">✅ Hoàn thành</span>
+                            <span class="badge bg-info text-dark">📦 Chờ giao hàng</span>
+                            @elseif($order->status_order == 3)
+                            <span class="badge bg-info text-dark">🚚 Đang giao hàng</span>
+                            @elseif($order->status_order == 4)
+                            <span class="badge bg-success">📬 Đã nhận hàng</span>
+                            @elseif($order->status_order == 5)
+                            <span class="badge bg-success">🏁 Hoàn thành</span>
+                            @elseif($order->status_order == 6)
+                            <span class="badge bg-danger">❌ Đã hủy</span>
+                            @elseif($order->status_order == 7)
+                            <span class="badge bg-warning text-dark">💸 Đang hoàn tiền</span>
                             @else
-                            <span class="badge bg-secondary">❓ Không xác định</span>
+                            <span class="badge bg-secondary">❓ Trạng thái không xác định</span>
                             @endif
                         </td>
+
+
                         <td>{{ \Carbon\Carbon::parse($order->create_at)->format('d/m/Y H:i') }}</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalOrder{{ $order->id_order }}">
                                 <i class="bi bi-eye"></i> Xem
                             </button>
 
-                            <!-- Modal -->
                             <div class="modal fade" id="modalOrder{{ $order->id_order }}" tabindex="-1" aria-labelledby="modalLabel{{ $order->id_order }}" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-lg">
                                         <div class="modal-header bg-primary text-white">
-                                            <h5 class="modal-title">Chi tiết đơn hàng #{{ $order->id_order }}</h5>
+                                            <h5 class="modal-title">
+                                                🧾 Chi tiết đơn hàng <strong>#{{ $order->id_order }}</strong>
+                                            </h5>
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <div class="mb-2"><strong>👤 Khách hàng:</strong> {{ $order->name }}</div>
-                                            <div class="mb-2"><strong>📍 Địa chỉ:</strong> {{ $order->shipping_address }}</div>
-                                            <div class="mb-3"><strong>📞 Số điện thoại:</strong> {{ $order->tel }}</div>
+
+                                        <div class="modal-body px-4">
+                                            <!-- Thông tin khách hàng -->
+                                            <div class="mb-3 text-start">
+                                                <h6 class="fw-bold text-primary">👤 Thông tin khách hàng</h6>
+                                                <p class="mb-1"><strong>Họ tên:</strong> {{ $order->name }}</p>
+                                                <p class="mb-1"><strong>📞 SĐT:</strong> {{ $order->tel }}</p>
+                                                <p class="mb-0"><strong>📍 Địa chỉ:</strong> {{ $order->shipping_address }}</p>
+                                            </div>
+
                                             <hr>
-                                            <h6 class="mb-3">🛍️ Danh sách sản phẩm:</h6>
-                                            <table class="table table-bordered text-center">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>Ảnh</th>
-                                                        <th>Tên SP</th>
-                                                        <th>Số lượng</th>
-                                                        <th>Đơn giá</th>
-                                                        <th>Thành tiền</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($order->orderItems as $item)
-                                                    <tr>
-                                                        <td>
-                                                            <img src="{{ asset('storage/' . $item->product->img) }}" width="70" height="70" class="rounded">
-                                                        </td>
-                                                        <td>{{ $item->product->name }}</td>
-                                                        <td>{{ $item->quantity }}</td>
-                                                        <td>{{ number_format($item->price) }}đ</td>
-                                                        <td>{{ number_format($item->price * $item->quantity) }}đ</td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                                            <!-- Danh sách sản phẩm -->
+                                            <h6 class="fw-bold text-primary mb-3">🛍️ Sản phẩm trong đơn hàng</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered align-middle text-center">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>Ảnh</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Đơn giá</th>
+                                                            <th>Thành tiền</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($order->orderItems as $item)
+                                                        <tr>
+                                                            <td>
+                                                                <img src="{{ asset('storage/' . $item->product->img) }}" width="70" height="70" class="rounded shadow-sm">
+                                                            </td>
+                                                            <td>{{ $item->product->name }}</td>
+                                                            <td>{{ $item->quantity }}</td>
+                                                            <td>{{ number_format($item->price) }}đ</td>
+                                                            <td class="text-success fw-bold">{{ number_format($item->price * $item->quantity) }}đ</td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                         </td>
                         <td>
-                            @if($order->status_order != 2)
+                            @if($order->status_order != 5)
                             <form action="{{ route('orders.confirm', $order->id_order) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-success btn-sm">
