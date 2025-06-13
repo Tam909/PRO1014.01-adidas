@@ -28,26 +28,39 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        if ($order->status_order == 0) {
-            // Đang chờ → chuyển sang đang giao
-            $order->status_order = 1;
-            $message = 'Đơn hàng đang được giao.';
-        } elseif ($order->status_order == 1) {
-            // Đang giao → chuyển sang hoàn thành
-            $order->status_order = 2;
-            $message = 'Đơn hàng đã hoàn thành.';
-        } else {
-            $message = 'Đơn hàng đã được xử lý xong.';
+        switch ($order->status_order) {
+            case 0:
+                $order->status_order = 1; // Chờ xác nhận → Đã xác nhận
+                $message = 'Đơn hàng đã được xác nhận.';
+                break;
+            case 1:
+                $order->status_order = 2; //Chờ giao hàng
+                $message = 'Đơn hàng đang chờ giao.';
+                break;
+            case 2:
+                $order->status_order = 3; // Chờ giao hàng → Đang giao hàng
+                $message = 'Đơn hàng đang được giao.';
+                break;
+            case 3:
+                $order->status_order = 4; // Đang giao hàng → Đã nhận hàng
+                $message = 'Khách hàng đã nhận được hàng.';
+                break;
+            case 4:
+                $order->status_order = 5; // Đã nhận hàng → Hoàn thành
+                $message = 'Đơn hàng đã hoàn thành.';
+                break;
+            default:
+                $message = 'Đơn hàng đã được xử lý xong hoặc không thể xác nhận tiếp.';
+                break;
         }
 
         $order->save();
 
-
         $page = session('orders_page', 1);
-
 
         return redirect()->route('orders.index', ['page' => $page])->with('success', $message);
     }
+
 
 
     public function showCart()

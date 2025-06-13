@@ -35,7 +35,8 @@
                     <div class="mt-auto">
                         <form action="{{ route('cart.add', $product->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-sm btn-success">Thêm vào giỏ hàng</button>
+                           <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary mt-auto">Xem
+                                chi tiết</a>
                         </form>
                     </div>
                 </div>

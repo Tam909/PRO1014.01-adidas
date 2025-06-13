@@ -38,6 +38,12 @@
                                     </span>
                                 @endif
                             </a>
+                          
+                        </li>
+                        <li>
+                          <a href="{{ route('user.order.index') }}" class="nav-item nav-link">
+    Đơn Hàng của Tôi
+</a>
                         </li>
                     </ul>
 

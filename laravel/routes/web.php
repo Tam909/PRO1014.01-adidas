@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\CheckoutController;
+use App\Http\Controllers\User\OrderCotroller;
 use App\Http\Controllers\User\Product\ProductController as ProductProductController;
 use App\Models\Product;
 
@@ -70,7 +71,8 @@ Route::get('/', [ProductProductController::class, 'index'])->name('home');
 // Trang chi tiết sản phẩm
 Route::get('/products/{id}', [ProductProductController::class, 'show'])->name('products.show');
 // Danh sách sản phẩm 
-Route::get('/product/list', [ProductController::class, 'list'])->name('products.list');
+Route::get('/product/list', [\App\Http\Controllers\User\Product\ProductController::class, 'list'])->name('products.list');
+
 
 Route::get('/products', [ProductProductController::class, 'list'])->name('products.list');
 // Danh sách sản phẩm theo danh mục (ROUTE MỚI)
@@ -85,3 +87,10 @@ Route::get('/cart', [OrderController::class, 'showCart'])->name('carts.index')->
 Route::get('/checkout', [CheckoutController::class, 'showForm'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
+Route::get('/my-orders', [\App\Http\Controllers\User\OrderController::class, 'myOrders'])->name('user.order.index');
+Route::get('/my-orders/{id}/ajax', [\App\Http\Controllers\User\OrderController::class, 'showAjax'])->name('user.order.showAjax');
+Route::post('/my-orders/{id}/confirm-receive', [\App\Http\Controllers\User\OrderController::class, 'confirmReceive'])->name('user.order.confirmReceive');
+
+
+

@@ -82,6 +82,9 @@
                             <a href="{{ route('carts.index') }}" class="nav-item nav-link">
         <i class="fas fa-shopping-cart me-1"></i> Giỏ Hàng
     </a>
+    <a href="{{ route('user.order.index') }}" class="nav-item nav-link">
+    <i class="fas fa-clipboard-list me-1"></i> Đơn Hàng của Tôi
+</a>
                         </div>
                         <div class="d-none d-lg-flex align-items-center py-2">
     <ul class="navbar-nav flex-row align-items-center m-0">
