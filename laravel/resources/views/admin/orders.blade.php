@@ -19,6 +19,20 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+            <div class="toast align-items-center text-white bg-danger border-0 show" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('error') }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Đóng"></button>
+                </div>
+            </div>
+        </div>
+    @endif
+
 <div class="card shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
@@ -32,7 +46,7 @@
                         <th>Trạng thái</th>
                         <th>Ngày đặt</th>
                         <th>Chi tiết</th>
-                        <th>Xác nhận</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -42,27 +56,23 @@
                         <td>{{ $order->name }}</td>
                         <td>{{ $order->tel }}</td>
                         <td class="text-start">{{ $order->shipping_address }}</td>
-                        <td>
-                            @if($order->status_order == 0)
-                            <span class="badge bg-warning text-dark">⏳ Chờ xác nhận</span>
-                            @elseif($order->status_order == 1)
-                            <span class="badge bg-primary">✅  Đã xác nhận - Chờ xử lý</span>
-                            @elseif($order->status_order == 2)
-                            <span class="badge bg-info text-dark">📦 Đang chuẩn bị hàng</span>
-                            @elseif($order->status_order == 3)
-                            <span class="badge bg-info text-dark">🚚 Đang giao hàng</span>
-                            @elseif($order->status_order == 4)
-                            <span class="badge bg-success">📬  Đã giao thành công</span>
-                            @elseif($order->status_order == 5)
-                            <span class="badge bg-success">🏁 Hoàn thành</span>
-                            @elseif($order->status_order == 6)
-                            <span class="badge bg-danger">❌ Đã hủy</span>
-                            @elseif($order->status_order == 7)
-                            <span class="badge bg-warning text-dark">💸 Đang hoàn tiền</span>
-                            @else
-                            <span class="badge bg-secondary">❓ Trạng thái không xác định</span>
-                            @endif
-                        </td>
+                       <td>
+    <form action="{{ route('orders.updateStatus', $order->id_order) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <select name="status_order" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="0" {{ $order->status_order == 0 ? 'selected' : '' }}>⏳ Chờ xác nhận</option>
+            <option value="1" {{ $order->status_order == 1 ? 'selected' : '' }}>✅ Đã xác nhận - Chờ xử lý</option>
+            <option value="2" {{ $order->status_order == 2 ? 'selected' : '' }}>📦 Đang chuẩn bị hàng</option>
+            <option value="3" {{ $order->status_order == 3 ? 'selected' : '' }}>🚚 Đang giao hàng</option>
+            <option value="4" {{ $order->status_order == 4 ? 'selected' : '' }}>📬 Đã giao thành công</option>
+            <option value="5" {{ $order->status_order == 5 ? 'selected' : '' }}>🏁 Hoàn thành</option>
+            <option value="6" {{ $order->status_order == 6 ? 'selected' : '' }}>❌ Đã hủy</option>
+            <option value="7" {{ $order->status_order == 7 ? 'selected' : '' }}>💸 Đang hoàn tiền</option>
+        </select>
+    </form>
+</td>
+
 
 
                         <td>{{ \Carbon\Carbon::parse($order->create_at)->format('d/m/Y H:i') }}</td>
@@ -121,18 +131,7 @@
                                                 </table>
                                             </div>
                         </td>
-                        <td>
-                            @if($order->status_order != 5)
-                            <form action="{{ route('orders.confirm', $order->id_order) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-success btn-sm">
-                                    ✅ Xác nhận
-                                </button>
-                            </form>
-                            @else
-                            <span class="text-success fw-semibold">✔ Đã xác nhận</span>
-                            @endif
-                        </td>
+                       
                     </tr>
                     @endforeach
                 </tbody>

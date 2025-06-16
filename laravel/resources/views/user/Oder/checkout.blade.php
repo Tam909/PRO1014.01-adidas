@@ -50,22 +50,22 @@
               @enderror
             </div>
 
-            <fieldset class="mb-4">
-              <legend class="col-form-label fw-semibold mb-2">Phương thức thanh toán <span class="text-danger">*</span></legend>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="payment" id="cod" value="0" required
-                  {{ old('payment') == '0' ? 'checked' : '' }}>
-                <label class="form-check-label" for="cod">Thanh toán khi nhận hàng</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="payment" id="bank" value="1"
-                  {{ old('payment') == '1' ? 'checked' : '' }}>
-                <label class="form-check-label" for="bank">Chuyển khoản</label>
-              </div>
-              @error('payment')
-                <div class="text-danger small mt-1">{{ $message }}</div>
-              @enderror
-            </fieldset>
+           <fieldset class="mb-4">
+    <legend class="col-form-label fw-semibold mb-2">Phương thức thanh toán <span class="text-danger">*</span></legend>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="payment" id="cod" value="0" required
+        {{ old('payment') == '0' ? 'checked' : '' }}>
+      <label class="form-check-label" for="cod">Thanh toán khi nhận hàng</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="payment" id="bank" value="1"
+        {{ old('payment') == '1' ? 'checked' : '' }}>
+      <label class="form-check-label" for="bank">Thanh toán Online</label>
+    </div>
+    @error('payment')
+      <div class="text-danger small mt-1">{{ $message }}</div>
+    @enderror
+  </fieldset>
 
             @if(session('success'))
             <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
