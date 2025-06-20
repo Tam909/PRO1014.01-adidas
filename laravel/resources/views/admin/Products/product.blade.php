@@ -37,8 +37,8 @@
                 </td>
                 <td>{{ $p->status == 0 ? 'Hoạt động' : 'Không hoạt động' }}</td>
                 <td>
-                    <a href="{{ route('products.edit', $p) }}" class="btn btn-sm btn-warning">Sửa</a>
-                    <form action="{{ route('products.destroy', $p) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('products.edit', $p->id) }}" class="btn btn-sm btn-warning">Sửa</a>
+                    <form action="{{ route('products.destroy', $p->id) }}" method="POST" style="display:inline;">
                         @csrf @method('DELETE')
                         <button onclick="return confirm('Xoá thật không?')" class="btn btn-sm btn-danger">Xoá</button>
                     </form>

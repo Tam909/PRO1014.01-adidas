@@ -22,31 +22,51 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Đăng xuất
 Route::post('/logout', function () {
-    Auth::logout();
-    return redirect()->route('home')->with('success', 'Đăng xuất thành công!');
+  Auth::logout();
+  return redirect()->route('home')->with('success', 'Đăng xuất thành công!');
 })->name('logout');
 
 // Middleware cho admin
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+  Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+  Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
 
-    // Quản lý sản phẩm
-    Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
+  // Quản lý sản phẩm
+  // Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
+  // Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
+  // Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
 
-    // Quản lý đơn hàng
-    Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
+  // --- Quản lý Sản phẩm (Product Management) ---
+  // Định nghĩa rõ ràng từng route cho mỗi thao tác:
+  // Hiển thị danh sách sản phẩm
+  Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
+  // Hiển thị form thêm sản phẩm mới
+  Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
+  // Xử lý lưu sản phẩm mới
+  Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');
+  // Hiển thị form sửa sản phẩm
+  Route::get('/admin/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+  // Xử lý cập nhật sản phẩm
+  Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('products.update');
+  // Xử lý xóa sản phẩm
+  Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+  // Nếu bạn muốn route show chi tiết sản phẩm:
+  // Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+
+  // Quản lý đơn hàng
+  Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
   Route::post('/orders/confirm/{id}', [OrderController::class, 'confirm'])->name('orders.confirm');
-    // Quản lý người dùng
-    Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users', [UserController::class, 'index'])->name('admin.users');
-    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
-    Route::put('/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+  // Quản lý người dùng
+  Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+  Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+  Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+  Route::put('/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
+  Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
-    // Quản lý danh mục
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
-    Route::resource('categories', CategoryController::class)->names('admin.category');
+  // Quản lý danh mục
+  Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+  Route::resource('categories', controller: CategoryController::class)->names('admin.category');
 });
 
 // Thêm sản phẩm vào giỏ hàng
