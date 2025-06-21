@@ -21,7 +21,6 @@
                 <th>Ngày tạo</th>
                 <th>Ngày cập nhật</th>
                 <th>Vai trò</th>
-                <th>Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -37,11 +36,7 @@
                             {{ ucfirst($user->role) }}
                         </span>
                     </td>
-                    <td>
-                        <a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-warning">Sửa</a>
-
-                        
-                    </td>
+                  
                 </tr>
             @endforeach
         </tbody>

@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Http\Controllers\Controller;
+use App\Models\Varianti;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -70,20 +71,26 @@ class CheckoutController extends Controller
 
 
         foreach ($cart->cartDetail as $item) {
+            $variant = Varianti::lockForUpdate()->find($item->varianti_id);
+
+            if (!$variant || $variant->quantity < $item->quantity) {
+                return back()->with('error', 'Sản phẩm không đủ hàng trong kho.');
+            }
+
+
             OrderItem::create([
                 'order_id'    => $order->id_order,
-                'product_id'  => $item->product->id,
+                'product_id'  => $item->id_pro,
+                'variant_id'  => $item->varianti_id,
                 'quantity'    => $item->quantity,
                 'price'       => $item->money,
                 'total_money' => $item->quantity * $item->money,
             ]);
         }
 
+        // Dọn giỏ hàng
         $cart->cartDetail()->delete();
         $cart->delete();
-
-        $cart->status = 1;
-        $cart->save();
 
         return back()->with('success', 'Đặt hàng thành công!');
     }

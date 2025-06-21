@@ -14,6 +14,7 @@ protected $table = 'cart_details';
     protected $fillable = [
         'id_cart',
         'id_pro',
+        'varianti_id',
          'quantity',
           'money',
            'total_money'
@@ -23,6 +24,12 @@ protected $table = 'cart_details';
     {
           return $this->belongsTo(Product::class, 'id_pro', 'id'); 
     }
+    /**
+     * Get the cart that owns the CartDetail.
+     */
+    public function varianti() {
+    return $this->belongsTo(Varianti::class, 'varianti_id','id_var');
+}
 
     public function cart()
     {

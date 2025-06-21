@@ -21,5 +21,9 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'id_categories');
         
     }
+    public function variants()
+{
+    return $this->hasMany(Varianti::class, 'id_pro');
+}
    
 }
