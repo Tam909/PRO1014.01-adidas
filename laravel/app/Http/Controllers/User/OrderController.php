@@ -35,5 +35,18 @@ public function confirmReceive($id)
     return redirect()->route('user.order.index')->with('success', 'Cảm ơn bạn đã xác nhận!');
 }
 
-    
+    public function cancelOrder($id)
+{
+    $order = Order::where('id_order', $id)->where('user_id', auth()->id())->firstOrFail();
+
+    if ($order->status_order != 0) {
+        return back()->with('error', 'Chỉ có thể hủy đơn hàng đang chờ xác nhận.');
+    }
+
+    $order->status_order = 6; // Hủy đơn
+    $order->save();
+
+    return back()->with('success', 'Đơn hàng đã được hủy thành công.');
+}
+
 }

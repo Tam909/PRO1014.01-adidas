@@ -62,7 +62,7 @@
         @method('PUT')
         <select name="status_order" class="form-select form-select-sm" onchange="this.form.submit()">
             <option value="0" {{ $order->status_order == 0 ? 'selected' : '' }}>⏳ Chờ xác nhận</option>
-            <option value="1" {{ $order->status_order == 1 ? 'selected' : '' }}>✅ Đã xác nhận - Chờ xử lý</option>
+            <option value="1" {{ $order->status_order == 1 ? 'selected' : '' }}>✅ Đã xác nhận </option>
             <option value="2" {{ $order->status_order == 2 ? 'selected' : '' }}>📦 Đang chuẩn bị hàng</option>
             <option value="3" {{ $order->status_order == 3 ? 'selected' : '' }}>🚚 Đang giao hàng</option>
             <option value="4" {{ $order->status_order == 4 ? 'selected' : '' }}>📬 Đã giao thành công</option>

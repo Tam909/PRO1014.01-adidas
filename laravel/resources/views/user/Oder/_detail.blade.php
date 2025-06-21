@@ -48,3 +48,14 @@
         </button>
     </form>
 @endif
+<!-- Thông tin chi tiết đơn hàng bạn đang có ở đây -->
+
+<hr>
+
+@if ($order->status_order == 0)
+    <form action="{{ route('user.order.cancel', $order->id_order) }}" method="POST" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">
+        @csrf
+        <button type="submit" class="btn btn-danger w-100">🛑 Hủy đơn hàng</button>
+    </form>
+@endif
+

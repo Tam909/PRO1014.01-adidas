@@ -31,16 +31,15 @@ class OrderController extends Controller
     $newStatus = (int)$request->input('status_order');
 
     // Xử lý hủy trước
-    if ($newStatus == 6) {
-        if ($currentStatus > 2) {
-            return back()->with('error', 'Không thể hủy đơn hàng khi đã đang giao hoặc đã giao.');
-        }
-
-        // Cho phép hủy, không cần check nhảy cóc
-        $order->status_order = $newStatus;
+    if ($newStatus == 6 && $currentStatus == 5) {
+        return back()->with('error', 'Đơn hàng đã giao thành công, không thể hủy.');
+    }
+        if ($newStatus == 6) {
+        $order->status_order = 6;
         $order->save();
         return back()->with('success', 'Đơn hàng đã được hủy.');
     }
+
 
     // Check không nhảy cóc trạng thái (chỉ cho phép +1)
     if ($newStatus != $currentStatus && $newStatus != $currentStatus + 1) {

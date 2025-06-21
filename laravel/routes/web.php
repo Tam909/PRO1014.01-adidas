@@ -95,4 +95,5 @@ Route::get('/my-orders/{id}/ajax', [\App\Http\Controllers\User\OrderController::
 Route::post('/my-orders/{id}/confirm-receive', [\App\Http\Controllers\User\OrderController::class, 'confirmReceive'])->name('user.order.confirmReceive');
 
 
+Route::post('/my-orders/{id}/cancel', [\App\Http\Controllers\User\OrderController::class, 'cancelOrder'])->name('user.order.cancel');
 

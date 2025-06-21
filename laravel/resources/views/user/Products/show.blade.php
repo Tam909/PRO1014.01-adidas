@@ -63,6 +63,9 @@
         <input type="number" id="quantity" name="quantity" value="1" min="1"
             class="form-control" style="max-width: 100px;">
     </div>
+    <div class="mb-3">
+    <strong>Số lượng còn lại: </strong> <span id="available-quantity">Chưa chọn biến thể</span>
+</div>
 
     <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
 </form> 
@@ -77,4 +80,34 @@
     </body>
 
     </html>
+    <script>
+    const variants = @json($product->variants);
+    const availableSpan = document.getElementById('available-quantity');
+    const quantityInput = document.getElementById('quantity');
+    const colorSelect = document.getElementById('color_id');
+    const sizeSelect = document.getElementById('size_id');
+
+    function updateAvailableQuantity() {
+        const colorId = colorSelect.value;
+        const sizeId = sizeSelect.value;
+
+        if (colorId && sizeId) {
+            const variant = variants.find(v => v.id_color == colorId && v.id_size == sizeId);
+            if (variant) {
+                availableSpan.textContent = variant.quantity + ' sản phẩm';
+                quantityInput.max = variant.quantity;
+            } else {
+                availableSpan.textContent = 'Không có biến thể phù hợp';
+                quantityInput.max = 0;
+            }
+        } else {
+            availableSpan.textContent = 'Chưa chọn biến thể';
+            quantityInput.max = '';
+        }
+    }
+
+    colorSelect.addEventListener('change', updateAvailableQuantity);
+    sizeSelect.addEventListener('change', updateAvailableQuantity);
+</script>
+
 @endsection

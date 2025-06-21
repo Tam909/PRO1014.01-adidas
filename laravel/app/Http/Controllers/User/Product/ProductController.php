@@ -37,6 +37,7 @@ class ProductController extends Controller{
     
     function show($id)
     {
+        
         $product = Product::findOrFail($id);
         return view('user.Products.show', compact('product'));
     }
