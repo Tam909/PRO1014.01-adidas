@@ -4,7 +4,7 @@
     <a href="{{ route('products.index') }}">👕 Sản phẩm</a>
     <a href="{{ route('orders.index') }}">🧾 Đơn hàng</a>
     <a href="{{ route('users.index') }}">👤 Người dùng</a>
-    <a href="{{ route('categories.index') }}">📂 Danh mục</a>
+    <a href="{{ route('admin.categories') }}">📂 Danh mục</a>
     <a href="{{ route('home') }}" >🏠 Trang người dùng</a>
 
 </div>
