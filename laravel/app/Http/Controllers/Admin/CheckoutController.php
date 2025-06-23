@@ -92,11 +92,9 @@ class CheckoutController extends Controller
     ]);
 }
 
+        // Dọn giỏ hàng
         $cart->cartDetail()->delete();
         $cart->delete();
-
-        $cart->status = 1;
-        $cart->save();
 
         return back()->with('success', 'Đặt hàng thành công!');
     }

@@ -5,33 +5,34 @@
 @section('content')
     <h2 class="mb-4 fw-bold text-primary">🛒 Danh sách đơn hàng</h2>
 
-    @if (session('success'))
-        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
-            <div class="toast align-items-center text-white bg-success border-0 show" role="alert">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        {{ session('success') }}
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Đóng"></button>
-                </div>
+@if (session('success'))
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+    <div class="toast align-items-center text-white bg-success border-0 show" role="alert">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ session('success') }}
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Đóng"></button>
         </div>
-    @endif
+    </div>
+</div>
+@endif
 
-    @if(session('error'))
-        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
-            <div class="toast align-items-center text-white bg-danger border-0 show" role="alert">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        {{ session('error') }}
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Đóng"></button>
-                </div>
+@if(session('error'))
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+    <div class="toast align-items-center text-white bg-danger border-0 show" role="alert">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ session('error') }}
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Đóng"></button>
         </div>
-    @endif
+    </div>
+</div>
+@endif
+
 
 <div class="card shadow-sm">
     <div class="card-body">
@@ -46,7 +47,6 @@
                         <th>Trạng thái</th>
                         <th>Ngày đặt</th>
                         <th>Chi tiết</th>
-                       
                     </tr>
                 </thead>
                 <tbody>
@@ -56,22 +56,29 @@
                         <td>{{ $order->name }}</td>
                         <td>{{ $order->tel }}</td>
                         <td class="text-start">{{ $order->shipping_address }}</td>
-                       <td>
-    <form action="{{ route('orders.updateStatus', $order->id_order) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <select name="status_order" class="form-select form-select-sm" onchange="this.form.submit()">
-            <option value="0" {{ $order->status_order == 0 ? 'selected' : '' }}>⏳ Chờ xác nhận</option>
-            <option value="1" {{ $order->status_order == 1 ? 'selected' : '' }}>✅ Đã xác nhận </option>
-            <option value="2" {{ $order->status_order == 2 ? 'selected' : '' }}>📦 Đang chuẩn bị hàng</option>
-            <option value="3" {{ $order->status_order == 3 ? 'selected' : '' }}>🚚 Đang giao hàng</option>
-            <option value="4" {{ $order->status_order == 4 ? 'selected' : '' }}>📬 Đã giao thành công</option>
-            <option value="5" {{ $order->status_order == 5 ? 'selected' : '' }}>🏁 Hoàn thành</option>
-            <option value="6" {{ $order->status_order == 6 ? 'selected' : '' }}>❌ Đã hủy</option>
-            <option value="7" {{ $order->status_order == 7 ? 'selected' : '' }}>💸 Đang hoàn tiền</option>
-        </select>
-    </form>
-</td>
+                        <td>
+                            <form action="{{ route('orders.updateStatus', $order->id_order) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <select name="status_order" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    <option value="0" {{ $order->status_order == 0 ? 'selected' : '' }}>⏳ Chờ xác nhận</option>
+                                    <option value="1" {{ $order->status_order == 1 ? 'selected' : '' }}>✅ Đã xác nhận </option>
+                                    <option value="2" {{ $order->status_order == 2 ? 'selected' : '' }}>📦 Đang chuẩn bị hàng</option>
+                                    <option value="3" {{ $order->status_order == 3 ? 'selected' : '' }}>🚚 Đang giao hàng</option>
+                                    <option value="4" {{ $order->status_order == 4 ? 'selected' : '' }}>📬 Đã giao thành công</option>
+                                    <option value="5" {{ $order->status_order == 5 ? 'selected' : '' }}>🏁 Hoàn thành</option>
+                                    <option value="6" {{ $order->status_order == 6 ? 'selected' : '' }}>❌ Đã hủy</option>
+                                    <option value="7" {{ $order->status_order == 7 ? 'selected' : '' }}>💸 Đang hoàn tiền</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            @if($order->status_order == 5)
+                            <span class="badge bg-success">Đã thanh toán</span>
+                            @else
+                            <span class="badge bg-warning text-dark">Chưa thanh toán</span>
+                            @endif
+                        </td>
 
 
 
@@ -131,7 +138,6 @@
                                                 </table>
                                             </div>
                         </td>
-                       
                     </tr>
                     @endforeach
                 </tbody>
